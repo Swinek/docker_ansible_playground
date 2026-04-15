@@ -26,3 +26,19 @@ The main goal of this project is to replace manual environment configuration wit
 Navigate to the project directory and run the following command:
 ```bash
 ansible-playbook -i hosts.ini docker_setup.yml -K
+```
+
+## Verification
+
+To ensure the deployment was successful, follow these steps:
+
+### 1. Terminal Check (Docker Status)
+Run the following command to see if the container is running:
+```bash
+docker ps | grep first_container
+```
+### 2. Localhost check (Nginx Status)
+Run the following command to see if the nginx is running:
+```bash
+curl -I http://localhost:8080
+```
