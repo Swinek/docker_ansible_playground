@@ -1,0 +1,28 @@
+---
+  - name: Automatic Docker setup
+    hosts: webservers
+    become: yes
+
+    tasks:
+    - name: 1. Install Docker and Python library
+      apt:
+        name: 
+          - docker.io
+          - python3-docker
+        state: present
+        update_cache: yes
+
+    - name: 2. Docker status check
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: 3. Download and run a Docker container
+      docker_container:
+        name: first_container
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:80"
