@@ -1,28 +1,29 @@
 ---
-  - name: Automatic Docker setup
-    hosts: webservers
-    become: yes
+- name: Automatic Docker setup
+  hosts: webservers
+  become: true
 
-    tasks:
+  tasks:
     - name: 1. Install Docker and Python library
-      apt:
+      ansible.builtin.apt:
         name: 
           - docker.io
           - python3-docker
         state: present
-        update_cache: yes
+        update_cache: true
 
     - name: 2. Docker status check
-      service:
+      ansible.builtin.service:
         name: docker
         state: started
-        enabled: yes
+        enabled: true
 
     - name: 3. Download and run a Docker container
-      docker_container:
+      community.docker.docker_container:
         name: first_container
         image: nginx:latest
         state: started
         restart_policy: always
         ports:
           - "8080:80"
+
