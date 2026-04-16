@@ -6,7 +6,7 @@
   tasks:
     - name: 1. Install Docker and Python library
       ansible.builtin.apt:
-        name: 
+        name:
           - docker.io
           - python3-docker
         state: present
@@ -26,4 +26,3 @@
         restart_policy: always
         ports:
           - "8080:80"
-
